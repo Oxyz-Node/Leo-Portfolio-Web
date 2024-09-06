@@ -32,7 +32,8 @@
 
 :root {
 	--font-family: "Bricolage Grotesque", sans-serif;
-	--primary: #4770FF;
+	--primary: #FF7500; /* Changed from #4770FF to a coral color */
+	--secondary: #4770FF; /* Added secondary color - a teal shade */
 	--black: #1A1F2C;
 	--light-black: #576076;
 	--white: #ffffff;
@@ -422,13 +423,20 @@ p {
 	overflow: hidden;
 }
 
-.profile-card .image img {
+/* .profile-card .image img {
 	margin-top: 10px;
+} */
+
+.profile-card .image img {
+    width: 320px;
+    height: 180px;
+    object-fit: cover;
+    /* border-radius: 10px;  */
 }
 
-.profile-card .text {
+/* .profile-card .text {
 	margin-top: 24px;
-}
+} */
 
 .profile-card .text p {
 	margin-top: 8px;
@@ -615,6 +623,60 @@ p {
 .work-experiance-card .work-experiance-slider {
 	animation: scrollY 10s linear infinite;
 }
+
+.work-experiance-slider li {
+	margin-bottom: 20px;
+  }
+  
+  .work-item {
+	display: flex;
+	align-items: flex-start;
+  }
+  
+  .work-item .icon {
+	width: 40px;
+	height: 40px;
+	margin-right: 15px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .work-item .icon img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+  }
+  
+
+  .work-info {
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+  }
+  
+  .work-info .date {
+	width: 100%;
+	font-size: 0.8em;
+	color: #888;
+	margin-bottom: 5px;
+  }
+  
+  .work-info .text {
+	width: 100%;
+  }
+  
+  .work-info .title {
+	font-size: 1em;
+	margin-bottom: 3px;
+  }
+  
+  .work-info .subtitle {
+	font-size: 0.9em;
+	color: #555;
+  }
 
 @keyframes scrollY {
 	0% {
