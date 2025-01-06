@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
+import { useEffect, useLayoutEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 
 const roles = [
   'Entrepreneur',
@@ -34,14 +33,15 @@ const information = [
   }
 ]
 
+// Create a client-side only component for the content
 function TerminalContent() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
-  const [showPrompt, setShowPrompt] = useState(true)
+  const [showPrompt] = useState(true)
   const [scrollWidth, setScrollWidth] = useState(0)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const calculateWidth = () => {
       const roleWidth = 150 // Approximate width of each role item
       const totalWidth = roles.length * roleWidth
@@ -82,27 +82,23 @@ function TerminalContent() {
     return () => clearTimeout(timeout)
   }, [displayText, isTyping, currentIndex])
 
-  const formatDisplayText = (text: string) => {
-    const lines = text.split('\n')
-    if (lines.length < 2) return text
+  const renderContent = () => {
+    const lines = displayText.split('\n')
+    if (lines.length < 2) return displayText
 
     const [title, ...content] = lines
     return (
-      <div style={{ width: '100%', maxWidth: '100vw' }}>
-        <div className="font-bold text-[#73D25D] mb-2" style={{ wordBreak: 'break-word' }}>
-          {title}
-        </div>
-        <div className="text-white/90" style={{ wordBreak: 'break-word' }}>
-          {content.join('\n')}
-        </div>
-      </div>
+      <>
+        <div className="font-bold text-[#73D25D] mb-2">{title}</div>
+        <div className="text-white/90 whitespace-pre-wrap">{content.join('\n')}</div>
+      </>
     )
   }
 
   return (
-    <div className="flex flex-col h-[calc(100%-2rem)]" style={{ width: '100%', maxWidth: '100vw' }}>
+    <div className="flex flex-col h-[calc(100%-2rem)]">
       {/* Roles Display */}
-      <div className="relative mb-4 overflow-hidden flex-shrink-0" style={{ width: '100%' }}>
+      <div className="relative mb-4 overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black to-transparent z-10" />
         <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent z-10" />
         <motion.div 
@@ -132,9 +128,9 @@ function TerminalContent() {
       </div>
 
       {/* Terminal Text Content */}
-      <div className="flex-grow" style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden', overflowY: 'auto' }}>
-        <div style={{ width: '100%', maxWidth: '100vw', padding: '0 4px' }}>
-          {formatDisplayText(displayText)}
+      <div className="flex-grow overflow-y-auto">
+        <div className="max-w-full break-words">
+          {renderContent()}
           {showPrompt && (
             <span 
               className="ml-1 inline-block h-4 w-2 bg-primary-solid animate-pulse"
@@ -178,14 +174,15 @@ function TerminalContent() {
   )
 }
 
-// Use dynamic import with no SSR for the terminal content
-const DynamicTerminalContent = dynamic(() => Promise.resolve(TerminalContent), {
-  ssr: false
-})
-
 export function TerminalInfo() {
+  const [mounted, setMounted] = useState(false)
+
+  useLayoutEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <div style={{ width: '100%', maxWidth: '100vw', height: '100%', overflow: 'hidden' }} className="relative p-4 sm:p-6 font-mono text-sm">
+    <div className="relative h-full w-full p-4 sm:p-6 font-mono text-sm">
       {/* Terminal Header */}
       <div className="mb-2 flex items-center gap-2">
         <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
@@ -194,7 +191,9 @@ export function TerminalInfo() {
         <span className="ml-2 text-xs text-white opacity-50">personal.summary</span>
       </div>
 
-      <DynamicTerminalContent />
+      <AnimatePresence mode="wait">
+        {mounted && <TerminalContent />}
+      </AnimatePresence>
     </div>
   )
 } 

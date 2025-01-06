@@ -26,7 +26,7 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap"
         />
       </head>
-      <body className="min-h-screen bg-[#0a0a0a] font-['Satoshi'] antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-[#0a0a0a] font-['Satoshi'] antialiased">
         <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
