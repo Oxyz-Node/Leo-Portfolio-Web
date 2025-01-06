@@ -248,7 +248,7 @@ export function Awards() {
               <p className="text-xs text-white/60 truncate group-hover:whitespace-normal">
                 {award.description}
                 {award.highlight && (
-                  <span className="text-white/40 ml-1 hidden group-hover:inline">— {award.highlight}</span>
+                  <span className="text-white/40 ml-1 hidden group-hover:inline">&mdash; {award.highlight}</span>
                 )}
               </p>
             </div>
