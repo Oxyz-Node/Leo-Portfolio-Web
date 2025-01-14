@@ -2,6 +2,8 @@ import { TerminalInfo } from '@/components/sections/terminal-info'
 import { Experience } from '@/components/sections/experience'
 import { SkillsContent } from '@/components/sections/skills/SkillsContent'
 import { Awards } from '@/components/sections/awards'
+import { TechStack } from '@/components/sections/tech-stack'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -17,15 +19,21 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Monkey Emoji Section (1/3) */}
+            {/* Profile Photo Section (1/3) */}
             <div className="relative order-1 md:order-2">
               <div className="elevated-card relative h-[120px] w-[120px] md:w-auto md:h-auto md:aspect-square rounded-full overflow-hidden mx-auto">
                 {/* Gradient Background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#CFE301] via-[#73D25D] to-[#1a4a2e]" />
                 
-                {/* Emoji Container */}
+                {/* Photo Container */}
                 <div className="relative flex h-full w-full items-center justify-center">
-                  <span className="text-4xl md:text-[120px] animate-float">🐒</span>
+                  <Image
+                    src="/leo_photo.png"
+                    alt="Leo Naruebet"
+                    fill
+                    className="object-cover animate-float translate-y-[20%]"
+                    priority
+                  />
                 </div>
 
                 {/* Decorative Grid */}
@@ -62,6 +70,7 @@ export default function Home() {
       </div>
       <Experience />
       <SkillsContent />
+      <TechStack />
       <Awards />
     </main>
   )
