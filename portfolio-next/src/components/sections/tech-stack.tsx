@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { SiSwift, SiHtml5, SiCss3, SiJavascript, SiArduino, SiNextdotjs, SiNodedotjs, SiMongodb, SiPython, SiReact, SiJupyter, SiCplusplus, SiAuth0, SiVercel, SiRailway } from 'react-icons/si'
+import { SiSwift, SiHtml5, SiCss3, SiJavascript, SiArduino, SiNextdotjs, SiNodedotjs, SiMongodb, SiPython, SiReact, SiJupyter, SiCplusplus, SiAuth0, SiVercel, SiRailway, SiTailwindcss } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 
 const techStack = [
@@ -79,6 +79,11 @@ const techStack = [
     name: 'Railway',
     icon: SiRailway,
     color: '#FFFFFF'
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: SiTailwindcss,
+    color: '#38BDF8'
   }
 ]
 

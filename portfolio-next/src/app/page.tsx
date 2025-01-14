@@ -4,6 +4,7 @@ import { SkillsContent } from '@/components/sections/skills/SkillsContent'
 import { Awards } from '@/components/sections/awards'
 import { TechStack } from '@/components/sections/tech-stack'
 import Image from 'next/image'
+import { Founded } from '@/components/sections/founded'
 
 export default function Home() {
   return (
@@ -67,11 +68,12 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Founded />
+        <TechStack />
+        <Experience />
+        <SkillsContent />
+        <Awards />
       </div>
-      <Experience />
-      <SkillsContent />
-      <TechStack />
-      <Awards />
     </main>
   )
 }
